@@ -1,14 +1,12 @@
 package controllers.key;
 
-import controllers.KeyService;
+import dao.KeyDao;
+import models.User;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 
 @WebServlet(name = "upload-key", value = "/upload-key")
 public class UploadKeyServlet extends HttpServlet {
@@ -22,12 +20,21 @@ public class UploadKeyServlet extends HttpServlet {
         try {
             // Lưu public key vào CSDL
             int userId = Integer.parseInt(request.getParameter("user_id"));
-            String publicKey = request.getParameter("public_key");
-            KeyService.updateEndTimeForOldKeys(userId);
-            KeyService.savePublicKeyToDatabase(userId, publicKey);
+            String publicKey = request.getParameter("public_key").trim();
+            KeyDao.updateEndTimeForOldKeys(userId);
+            KeyDao.savePublicKeyToDatabase(userId, publicKey);
 
             // Đặt thông tin vào request để hiển thị thông báo và publicKey trên trang key.jsp
-            request.setAttribute("publicKey", publicKey);
+//            request.setAttribute("publicKey", publicKey);
+            HttpSession session = request.getSession();
+            // update public key trong UserSection
+            User user = (User) session.getAttribute("user");
+            if (user == null) {
+                request.setAttribute("errorMessage", "Vui lòng đăng nhập.");
+                request.getRequestDispatcher("/WEB-INF/sign-in.jsp").forward(request, response); // Hiển thị lỗi trên trang login.jsp
+            }
+            user.setPublicKey(publicKey);
+            session.setAttribute("user", user);
             request.setAttribute("message", "Public Key đã được tải lên và cập nhật thành công!");
 
             // Forward về key.jsp để hiển thị kết quả

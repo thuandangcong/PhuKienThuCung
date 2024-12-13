@@ -1,38 +1,39 @@
 package controllers;
 
-import dao.JDBCUtil;
+import java.io.IOException;
+import java.sql.SQLException;
 
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+
+import dao.Database;
 
 @WebServlet("/upload-signature")
 public class UploadSignatureServlet extends HttpServlet {
-    JDBCUtil jdbcUtil = new JDBCUtil();
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, IOException {
-        int orderId = Integer.parseInt(request.getParameter("orderId"));
-        String signature = request.getParameter("signature");
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		int orderId = Integer.parseInt(request.getParameter("orderId"));
+		String signature = request.getParameter("signature");
+		Database dao = new Database();
+		try {
+			boolean isUpdated = dao.updateOrderSignature(orderId, signature);
+			if (isUpdated) {
+				// Gửi phản hồi thành công
+				response.setStatus(HttpServletResponse.SC_OK);
+				response.getWriter().write("Chữ ký đã được cập nhật thành công.");
+			} else {
+				// Gửi phản hồi thất bại nếu không tìm thấy orderId
+				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+				response.getWriter().write("Không tìm thấy đơn hàng với ID: " + orderId);
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-        String query = "UPDATE orders SET signature = ? WHERE id = ?";
-        try (Connection conn = jdbcUtil.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
-            stmt.setString(1, signature);
-            stmt.setInt(2, orderId);
-            int rowsUpdated = stmt.executeUpdate();
-            if (rowsUpdated > 0) {
-                response.getWriter().println("Signature uploaded successfully!");
-            } else {
-                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-                response.getWriter().println("Order not found.");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            response.getWriter().println("Error uploading signature.");
-        }
-    }
+	}
 }

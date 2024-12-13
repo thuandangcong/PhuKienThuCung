@@ -11,11 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.Database;
+import dao.KeyDao;
 import models.User;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-
+	Database dao = new Database();
 	// Phương thức GET để hiển thị trang đăng nhập
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -31,27 +32,28 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("password");
 
 		// Kiểm tra thông tin đăng nhập
-		Database dao = new Database();
 		User user = null;
 
 		try {
 			user = dao.loginUser(email, password);
+			// Kiểm tra nếu có người dùng và mật khẩu chính xác
+			if (user != null) {
+				// Đăng nhập thành công, chuyển hướng đến trang chủ hoặc trang người dùng
+				String publicKey = KeyDao.getPublicKeyByUserId(user.getId());
+				user.setPublicKey(publicKey);
+				request.getSession().setAttribute("user", user);
+				request.getRequestDispatcher("/WEB-INF/home").forward(request, response);
+			} else {
+				// Đăng nhập thất bại
+				request.setAttribute("errorMessage", "Sai email hoặc mật khẩu.");
+				request.getRequestDispatcher("/WEB-INF/sign-in.jsp").forward(request, response); // Hiển thị lỗi trên trang login.jsp
+			}
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 			response.getWriter().write("Đăng nhập thất bại. Vui lòng thử lại.");
 			return;
 		}
 
-		// Kiểm tra nếu có người dùng và mật khẩu chính xác
-		if (user != null) {
-			// Đăng nhập thành công, chuyển hướng đến trang chủ hoặc trang người dùng
-			request.getSession().setAttribute("user", user);
-			request.getRequestDispatcher("/WEB-INF/home").forward(request, response);
-		} else {
-			// Đăng nhập thất bại
-			request.setAttribute("errorMessage", "Sai email hoặc mật khẩu.");
-			request.getRequestDispatcher("/WEB-INF/sign-in.jsp").forward(request, response); // Hiển thị lỗi trên trang login.jsp
-		}
 	}
 	
 

@@ -40,11 +40,11 @@
                         <h3 class="panel-title">Thông Tin Public Key</h3>
                     </div>
                     <div class="panel-body">
-                        <c:if test="${not empty publicKey}">
+                        <c:if test="${not empty sessionScope.user.publicKey}">
                             <p><strong>Public Key Hiện Tại:</strong></p>
-                            <textarea class="form-control" rows="6" readonly>${publicKey}</textarea>
+                            <textarea class="form-control" rows="6" readonly>${sessionScope.user.publicKey}</textarea>
                         </c:if>
-                        <c:if test="${empty publicKey}">
+                        <c:if test="${empty sessionScope.user.publicKey}">
                             <p>Chưa có public key. Vui lòng tạo một cặp key mới.</p>
                         </c:if>
                     </div>
