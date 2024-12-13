@@ -38,6 +38,12 @@ public class URL extends HttpServlet {
                 case "address":
                     req.getRequestDispatcher("/WEB-INF/addresses.jsp").forward(req, resp);
                     break;
+                case "key":
+                    req.getRequestDispatcher("/WEB-INF/key.jsp").forward(req, resp);
+                    break;
+                case "uploadkey":
+                    req.getRequestDispatcher("/WEB-INF/upload-key.jsp").forward(req, resp);
+                    break;
                 default:
                     req.getRequestDispatcher("/WEB-INF/home.jsp").forward(req, resp);
                     break;

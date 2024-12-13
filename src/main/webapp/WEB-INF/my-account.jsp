@@ -24,6 +24,8 @@
 							<li><a href="url?page=myoders">Orders</a></li>
 							<li><a href="url?page=address">Addresses</a></li>
 							<li><a href="url?page=chagepass">Change Password</a></li>
+							<li><a href="url?page=key">Key</a></li>
+							<li><a href="url?page=uploadkey">Upload Key</a></li>
 							<li><a href="url?page=dashboard">Logout</a></li>
 						</ul>
 					</div>

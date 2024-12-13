@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
+
+
+// Tạo đơn hàng và lưu hash
 @WebServlet("/create-order")
 public class CreateOrderServlet extends HttpServlet {
     JDBCUtil jdbcUtil = new JDBCUtil();
