@@ -24,7 +24,7 @@ public class Database {
 		// Tải driver MySQL
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		// Kết nối tới cơ sở dữ liệu và trả về đối tượng Connection
-		return DriverManager.getConnection("jdbc:mysql://localhost:3306/shop_thu_cung", "root", "123456");
+		return DriverManager.getConnection("jdbc:mysql://localhost:3306/shop_thu_cung", "root", "");
 	}
 
 	public List<Order> getOrdersByUserId(int userId) throws SQLException, ClassNotFoundException {

@@ -57,7 +57,7 @@
                     </div>
                     <div class="panel-body">
                         <form action="genkey" method="post">
-                            <input type="hidden" name="user_id" value="1" />
+                            <input type="hidden" name="user_id" value="${sessionScope.user.id}" />
                             <button type="submit" class="btn btn-success btn-block">Tạo Key</button>
                         </form>
                     </div>
@@ -76,7 +76,7 @@
                     </div>
                     <div class="panel-body">
                         <form action="upload-key" method="post">
-                            <input type="hidden" name="user_id" value="1" />
+                            <input type="hidden" name="user_id" value="${sessionScope.user.id}" />
                             <div class="form-group">
                                 <label for="public_key">Nhập Public Key Mới:</label>
                                 <textarea name="public_key" id="public_key" class="form-control" rows="5" placeholder="Nhập public key mới..."></textarea>
@@ -93,7 +93,7 @@
                     </div>
                     <div class="panel-body">
                         <form action="reportkey" method="post">
-                            <input type="hidden" name="user_id" value="1" />
+                            <input type="hidden" name="user_id" value="${sessionScope.user.id}" />
                             <p>Bạn đã mất key? Nếu bạn muốn xóa public key cũ và tạo lại key mới, vui lòng báo ở đây:</p>
                             <button type="submit" class="btn btn-danger btn-lg btn-block">Báo Mất Key</button>
                         </form>

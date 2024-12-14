@@ -1,6 +1,7 @@
 package controllers;
 
 import dao.JDBCUtil;
+import service.HashService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
