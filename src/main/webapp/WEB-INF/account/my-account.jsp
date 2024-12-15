@@ -6,7 +6,7 @@
 		<div class="container">
 			<div class="breadcrumb-inner">
 				<ul class="list-inline list-unstyled">
-					<li><a href="home.jsp">Home</a></li>
+					<li><a href="../home.jsp">Home</a></li>
 					<li class="active">My Account</li>
 				</ul>
 			</div>
@@ -25,7 +25,6 @@
 							<li><a href="url?page=address">Addresses</a></li>
 							<li><a href="url?page=chagepass">Change Password</a></li>
 							<li><a href="url?page=key">Key</a></li>
-							<li><a href="url?page=uploadkey">Upload Key</a></li>
 							<li><a href="url?page=dashboard">Logout</a></li>
 						</ul>
 					</div>

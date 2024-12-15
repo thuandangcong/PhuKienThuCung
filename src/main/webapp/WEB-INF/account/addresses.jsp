@@ -12,8 +12,8 @@
     <title>Manage Address</title>
 
     <!-- Bootstrap Core CSS -->
-    <jsp:include page="css.jsp"></jsp:include>
-    <jsp:include page="header.jsp"></jsp:include>
+    <jsp:include page="../css.jsp"></jsp:include>
+    <jsp:include page="../header.jsp"></jsp:include>
 </head>
 <body>
   <hr/>
@@ -27,17 +27,7 @@
             <!-- Right side: Manage Address Form (2/3) -->
             <div class="col-md-8">
                 <h5>Manage Your Address</h5>
-                
-                <!-- Address Display -->
-                <div class="address-display">
-                    <h6>Current Address</h6>
-                    <p><strong>Street Address:</strong> 123 Main St</p>
-                    <p><strong>City:</strong> New York</p>
-                    <p><strong>State:</strong> NY</p>
-                    <p><strong>ZIP Code:</strong> 10001</p>
-                    <p><strong>Country:</strong> USA</p>
-                
-                </div>
+
                       <hr/>
                 <!-- Address Edit Form (if editing) -->
                 <form method="POST" action="update-address" class="address-form mt-4">
@@ -69,9 +59,9 @@
     </div>
 
     <!-- Include Footer -->
-    <jsp:include page="footer.jsp"></jsp:include>
+    <jsp:include page="../footer.jsp"></jsp:include>
 
     <!-- Include Scripts -->
-    <jsp:include page="script.jsp"></jsp:include>
+    <jsp:include page="../script.jsp"></jsp:include>
 </body>
 </html>

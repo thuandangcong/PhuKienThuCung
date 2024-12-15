@@ -146,7 +146,7 @@
             
             <div class="home-banner"> <img src="assets\images\banners\LHS-banner.jpg" alt="Image"> </div>
           </div>
-          <!-- /.sidebar-filter --> 
+          <!-- /.sidebar-filters -->
         </div>
         <!-- /.sidebar-module-container --> 
       </div>
@@ -165,7 +165,7 @@
                   <li><a data-toggle="tab" href="#list-container"><i class="icon fa fa-th-list"></i>List</a></li>
                 </ul>
               </div>
-              <!-- /.filter-tabs --> 
+              <!-- /.filters-tabs -->
             </div>
             <!-- /.col -->
             <div class="col col-sm-12 col-md-6">

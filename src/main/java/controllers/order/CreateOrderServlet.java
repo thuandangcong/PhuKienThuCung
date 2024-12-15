@@ -1,4 +1,4 @@
-package controllers;
+package controllers.order;
 
 import dao.JDBCUtil;
 import service.HashService;

@@ -11,44 +11,45 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.Database;
+import dao.CategoryDAO;
+import dao.ProductDAO;
 import models.Category;
 import models.Product;
 
 @WebServlet({"/", "/home"})
 public class HomeServlet extends HttpServlet {
-
+	private ProductDAO productDAO = new ProductDAO();
+	private CategoryDAO categoryDAO = new CategoryDAO();
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-			Database dao = new Database();
 
 			// Lấy 6 sản phẩm mới nht
-			List<Product> listProductdesc = dao.getLatestProducts();
+			List<Product> listProductdesc = productDAO.getLatestProducts();
 
 			// Truyền danh sách sản phẩm mới nhất vào request để hiển thị trên home.jsp
 			request.setAttribute("listProductdesc", listProductdesc);
 			
 			// Lay 3 san pham ngua nhien
-			List<Product> listRandomProductc = dao.getRandomProducts();
+			List<Product> listRandomProductc = productDAO.getRandomProducts();
 			request.setAttribute("listRandomProductc", listRandomProductc);
 			// Lay 6 san pham cu nhat
-			List<Product> listProductold= dao.getOldSixProducts();
+			List<Product> listProductold= productDAO.getOldSixProducts();
 			request.setAttribute("listProductold", listProductold);
 			
 			//Lay 8 san pham co gia thap nhat
-			List<Product> listProductcheap = dao.getEightCheapestProducts();
+			List<Product> listProductcheap = productDAO.getEightCheapestProducts();
 			request.setAttribute("listProductcheap", listProductcheap);
 			
 			//Lay 3 san pham moi nhat
-			List<Product> listProductThree = dao.getLatestThreeProducts();
+			List<Product> listProductThree = productDAO.getLatestThreeProducts();
 			request.setAttribute("listProductThree", listProductThree);
 			
 			//Lay 3 san pham cu nhat
-			List<Product> listProductoldThree = dao.getOldThreeProducts();
+			List<Product> listProductoldThree = productDAO.getOldThreeProducts();
 			request.setAttribute("listProductoldThree", listProductoldThree);
 			
-			List<Category> listCategory = dao.getAllCategories();
+			List<Category> listCategory = categoryDAO.getAllCategories();
 			request.setAttribute("listCategory", listCategory);
 			
 			request.getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);

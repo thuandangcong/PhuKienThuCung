@@ -22,7 +22,7 @@
         <div class="row">
             <!-- Left side: My Account content (1/3) -->
             <div class="col-md-4">
-                <jsp:include page="my-account.jsp"></jsp:include>
+                <jsp:include page="account/my-account.jsp"></jsp:include>
             </div>
 
             <!-- Right side: Orders Table (2/3) -->

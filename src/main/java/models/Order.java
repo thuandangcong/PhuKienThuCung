@@ -15,7 +15,7 @@ public class Order {
 	private String order_hash;
 	private String order_signature;
 	public Order(int order_id, int user_id, String name, String phone, String email_address, String order_date,
-			int total_price, String shipping_address, String status, String order_hash, String order_signature) {
+			int total_price, String shipping_address, String status, String order_signature) {
 		super();
 		this.order_id = order_id;
 		this.user_id = user_id;
@@ -26,7 +26,6 @@ public class Order {
 		this.total_price = total_price;
 		this.shipping_address = shipping_address;
 		this.status = status;
-		this.order_hash = order_hash;
 		this.order_signature = order_signature;
 	}
 	public int getOrder_id() {

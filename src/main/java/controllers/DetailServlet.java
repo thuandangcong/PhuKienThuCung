@@ -10,26 +10,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.Database;
+import dao.ProductDAO;
 import models.Product;
 
 @WebServlet("/detail")
 public class DetailServlet extends HttpServlet {
+	private ProductDAO productDAO = new ProductDAO();
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
 			// Lấy id sản phẩm từ tham số URL
 			String itemId = request.getParameter("id");
-			Database dao = new Database();
-			Product	product = dao.getProductById(itemId);
+			Product	product = productDAO.getProductById(itemId);
 			request.setAttribute("product", product);
 			
 			// Lay 3 san pham ngua nhien
-			List<Product> listRandomProductc = dao.getRandomProducts();
+			List<Product> listRandomProductc = productDAO.getRandomProducts();
 			request.setAttribute("listRandomProductc", listRandomProductc); 
 			// Lay 6 san pham ngua nhien
-			List<Product> getRandomSixProducts = dao.getRandomSixProducts();
+			List<Product> getRandomSixProducts = productDAO.getRandomSixProducts();
 			request.setAttribute("getRandomSixProducts", getRandomSixProducts); 
 			
 			

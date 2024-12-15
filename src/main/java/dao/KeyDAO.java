@@ -8,10 +8,10 @@ import java.sql.SQLException;
 
 
 // Tạo key
-public class KeyDao {
+public class KeyDAO {
     static JDBCUtil jdbcUtil = new JDBCUtil();
     public static String getPublicKeyByUserId(int userId) throws ClassNotFoundException, SQLException {
-        String select = "SELECT public_key FROM `user_keys` WHERE user_id = ?"; // Truy vấn lấy publickey theo iduser
+        String select = "SELECT public_key FROM `user_keys` WHERE user_id = ? and end_time is null"; // Truy vấn lấy publickey theo iduser
 
         try (Connection connection = jdbcUtil.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(select)) {
@@ -21,18 +21,14 @@ public class KeyDao {
 
             // Nếu tìm thấy publickey, trả về giá trị publickey
             if (rs.next()) {
-                return rs.getString("public_key");
+                return rs.getString("public_key").trim();
             }
         }
 
         // Nếu không tìm thấy publickey, trả về null
         return null;
     }
-    public static KeyPair generateKeyPair() throws NoSuchAlgorithmException {
-        KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
-        keyGen.initialize(2048);
-        return keyGen.generateKeyPair();
-    }
+
 
 
 

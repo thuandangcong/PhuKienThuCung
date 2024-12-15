@@ -12,8 +12,8 @@
     <title>Change Password</title>
 
     <!-- Bootstrap Core CSS -->
-    <jsp:include page="css.jsp"></jsp:include>
-    <jsp:include page="header.jsp"></jsp:include>
+    <jsp:include page="../css.jsp"></jsp:include>
+    <jsp:include page="../header.jsp"></jsp:include>
 </head>
 <body>
       <hr/>
@@ -50,9 +50,9 @@
     </div>
 
     <!-- Include Footer -->
-    <jsp:include page="footer.jsp"></jsp:include>
+    <jsp:include page="../footer.jsp"></jsp:include>
 
     <!-- Include Scripts -->
-    <jsp:include page="script.jsp"></jsp:include>
+    <jsp:include page="../script.jsp"></jsp:include>
 </body>
 </html>

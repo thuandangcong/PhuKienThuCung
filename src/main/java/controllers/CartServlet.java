@@ -7,14 +7,14 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
-import dao.Database;
+import dao.ProductDAO;
 import models.Cart;
 import models.LineItem;
 import models.Product;
 
 @WebServlet("/cart")
 public class CartServlet extends HttpServlet {
-
+	private ProductDAO productDAO = new ProductDAO();
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -50,11 +50,11 @@ public class CartServlet extends HttpServlet {
 			} catch (NumberFormatException nfe) {
 				quantity = 1;
 			}
-			Database dao = new Database();
+
 			Product product;
 			try {
 				// lấy sản phẩm theo id
-				product = dao.getProductID(productCode);
+				product = productDAO.getProductID(productCode);
 				LineItem lineItem = new LineItem();
 				lineItem.setProduct(product);
 				lineItem.setQuantity(quantity);

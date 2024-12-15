@@ -1,15 +1,13 @@
 package controllers.key;
 
 import dao.JDBCUtil;
-import dao.KeyDao;
+import dao.KeyDAO;
 import models.User;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 
 @WebServlet(name = "reportkey", value = "/reportkey")
 public class ReportLostKeyServlet extends HttpServlet {
@@ -21,13 +19,8 @@ public class ReportLostKeyServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int userId = Integer.parseInt(request.getParameter("user_id"));
 
         try {
-            KeyDao.reportLostKey(userId);
-
-            // Đặt thông báo và xóa public key khỏi request
-//            request.setAttribute("publicKey", null);
             HttpSession session = request.getSession();
             // update public key trong UserSection
             User user = (User) session.getAttribute("user");
@@ -35,13 +28,17 @@ public class ReportLostKeyServlet extends HttpServlet {
                 request.setAttribute("errorMessage", "Vui lòng đăng nhập.");
                 request.getRequestDispatcher("/WEB-INF/sign-in.jsp").forward(request, response); // Hiển thị lỗi trên trang login.jsp
             }
+
+            int userId = Integer.parseInt(request.getParameter("user_id"));
+            KeyDAO.reportLostKey(userId);
+
             user.setPublicKey(null);
             session.setAttribute("user", user);
 
             request.setAttribute("message", "Key đã được báo mất và vô hiệu hóa thành công!");
 
             // Forward về key.jsp để hiển thị kết quả
-            request.getRequestDispatcher("/WEB-INF/key.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/account/key.jsp").forward(request, response);
 
         } catch (Exception e) {
             e.printStackTrace();

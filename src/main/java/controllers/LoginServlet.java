@@ -2,7 +2,6 @@ package controllers;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,13 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.Database;
-import dao.KeyDao;
+import dao.KeyDAO;
+import dao.UserDAO;
 import models.User;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-	Database dao = new Database();
+	private UserDAO userDAO = new UserDAO();
 	// Phương thức GET để hiển thị trang đăng nhập
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -35,11 +34,11 @@ public class LoginServlet extends HttpServlet {
 		User user = null;
 
 		try {
-			user = dao.loginUser(email, password);
+			user = userDAO.loginUser(email, password);
 			// Kiểm tra nếu có người dùng và mật khẩu chính xác
 			if (user != null) {
 				// Đăng nhập thành công, chuyển hướng đến trang chủ hoặc trang người dùng
-				String publicKey = KeyDao.getPublicKeyByUserId(user.getId());
+				String publicKey = KeyDAO.getPublicKeyByUserId(user.getId());
 				user.setPublicKey(publicKey);
 				request.getSession().setAttribute("user", user);
 				request.getRequestDispatcher("/WEB-INF/home").forward(request, response);

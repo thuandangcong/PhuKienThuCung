@@ -14,8 +14,8 @@
 
 <%--    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/key.css">--%>
     <!-- Bootstrap Core CSS -->
-    <jsp:include page="css.jsp"></jsp:include>
-    <jsp:include page="header.jsp"></jsp:include>
+    <jsp:include page="../css.jsp"></jsp:include>
+    <jsp:include page="../header.jsp"></jsp:include>
 </head>
 <body>
     <div class="container mt-5">
@@ -105,9 +105,9 @@
     </div>
 
     <!-- Include Footer -->
-    <jsp:include page="footer.jsp"></jsp:include>
+    <jsp:include page="../footer.jsp"></jsp:include>
 
     <!-- Include Scripts -->
-    <jsp:include page="script.jsp"></jsp:include>
+    <jsp:include page="../script.jsp"></jsp:include>
 </body>
 </html>

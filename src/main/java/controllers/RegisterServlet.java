@@ -1,5 +1,7 @@
 package controllers;
 
+import dao.UserDAO;
+
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -9,11 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.Database;
-
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
-
+	private UserDAO userDAO = new UserDAO();
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// Chuyển hướng người dùng đến trang đăng ký (nếu cần thiết)
@@ -36,10 +36,8 @@ public class RegisterServlet extends HttpServlet {
 			return;
 		}
 
-		// Thực hiện đăng ký người dùng
-		Database dao = new Database();
 		try {
-			boolean success = dao.registerUser(username, password, email, phone);
+			boolean success = userDAO.registerUser(username, password, email, phone);
 			if (success) {
 				// Đăng ký thành công, chuyển hướng đến trang đăng nhập
 				request.getRequestDispatcher("/home").forward(request, response);

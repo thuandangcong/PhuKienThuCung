@@ -10,12 +10,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import dao.Database;
+import dao.CategoryDAO;
+import dao.ProductDAO;
 import models.Category;
 import models.Product;
 
 @WebServlet("/cate")
 public class CategoryServlet extends HttpServlet {
+	private CategoryDAO categoryDAO = new CategoryDAO();
+	private ProductDAO productDAO = new ProductDAO();
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -24,19 +27,18 @@ public class CategoryServlet extends HttpServlet {
 		if (categoryIdParam != null) {
 			try {
 				int categoryId = Integer.parseInt(categoryIdParam); // Chuyển đổi từ String sang int
-				Database dao = new Database();
 
 				// Lấy danh sách sản phẩm theo danh mục
-				List<Product> productList = dao.getProductsByCategory(categoryId);
+				List<Product> productList = productDAO.getProductsByCategory(categoryId);
 				// Gửi danh sách sản phẩm vào request để hiển thị trên JSP
 				request.setAttribute("productList", productList);
 
 				// Gửi danh mục hiện tại vào request để hiển thị tiêu đề
-				List<Category> listCategory = dao.getAllCategories();
+				List<Category> listCategory = categoryDAO.getAllCategories();
 				request.setAttribute("listCategory", listCategory);
 				
 				// Lay 3 san pham ngua nhien
-				List<Product> listRandomProductc = dao.getRandomProducts();
+				List<Product> listRandomProductc = productDAO.getRandomProducts();
 				request.setAttribute("listRandomProductc", listRandomProductc);
 				
 				// Chuyển hướng đến trang JSP hiển thị sản phẩm (ví dụ: category.jsp)

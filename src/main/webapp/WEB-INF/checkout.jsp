@@ -91,7 +91,7 @@
                                                         </tr>
                                                     </tbody>
                                                 </table>
- 
+
                                             </div>
                                             <!-- guest-login -->
 
@@ -178,7 +178,7 @@
                                                     <tr>
                                                         <td>${item.product.name} x ${item.quantity}</td>
                                                         <td>${item.totalCurrencyFormat}</td>
-                                                       
+
                                                     </tr>
                                                 </c:forEach>
                                             </tbody>
@@ -190,7 +190,7 @@
                                                 </tr>
                                             </tfoot>
                                         </table>
-                         
+
 <div class="clearfix pull-right">
     <button type="submit" class="btn-upper btn btn-primary">Apply Order</button>
                         <!-- checkout-progress-sidebar : END -->
@@ -198,9 +198,9 @@
                                     </div>
                                 </div>
                             </div>
-       
+
                         </div>
-                                           
+
 
 
                 </div><!-- /.row -->
@@ -256,7 +256,7 @@
                     <span><a href="#">flipmart@themesground.com</a></span>
                 </div>
             </li>
-              
+
             </ul>
     </div><!-- /.module-body -->
                 </div><!-- /.col -->
