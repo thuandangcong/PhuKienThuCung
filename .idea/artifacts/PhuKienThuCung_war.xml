@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="PhuKienThuCung:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>PhuKienThuCung</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="LTW_project_servlet.war">
+      <element id="artifact" artifact-name="PhuKienThuCung:war exploded" />
+    </root>
+  </artifact>
+</component>
